@@ -22,32 +22,32 @@ private:
 // Interfaz para definir las partes del objeto
 class Builder {
 public:
-    virtual void buildParteA() = 0;
-    virtual void buildParteB() = 0;
-    virtual bProduct* obtenerProducto() = 0;
+    virtual void buildParteA() = 0; // Método virtual puro para construir la parte A
+    virtual void buildParteB() = 0; // Método virtual puro para construir la parte B
+    virtual bProduct* obtenerProducto() = 0; // Método virtual puro para obtener el producto final
 };
 
 // Clase para implementar las partes del producto
 class BuilderConcreto : public Builder {
 public:
     BuilderConcreto() {
-        m_product = new bProduct();
+        m_product = new bProduct(); // Inicializa el producto en el constructor
     }
 
     void buildParteA() override {
-        m_product->agregarParte("Parte A");
+        m_product->agregarParte("Parte A"); // Construye la parte A del producto
     }
 
     void buildParteB() override {
-        m_product->agregarParte("Parte B");
+        m_product->agregarParte("Parte B"); // Construye la parte B del producto
     }
 
     bProduct* obtenerProducto() override {
-        return m_product;
+        return m_product; // Devuelve el producto construido
     }
 
 private:
-    bProduct* m_product;
+    bProduct* m_product; // Puntero al producto en construcción
 };
 
 // Clase que se encarga de la construcción del producto
@@ -56,10 +56,10 @@ public:
     Director(Builder* _builder) : m_builder(_builder) {}
 
     void build() {
-        m_builder->buildParteA();
-        m_builder->buildParteB();
+        m_builder->buildParteA(); // Construye la parte A
+        m_builder->buildParteB(); // Construye la parte B
     }
 
 private:
-    Builder* m_builder;
+    Builder* m_builder; // Puntero al constructor concreto
 };

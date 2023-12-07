@@ -1,8 +1,6 @@
 #pragma once
 #include "Prerequisites.h"
 
-
-
 // En este caso, la interfaz vieja es un círculo
 class Circulo {
 public:
@@ -34,11 +32,11 @@ public:
 
     void dibujar() override {
         cout << "Adaptador para dibujar." << endl;
-        m_Circulo->DibujarCirculo();
+        m_Circulo->DibujarCirculo(); // Llama al método de la interfaz vieja para adaptarlo al nuevo
     }
 
-public:
-    Circulo* m_Circulo;
+private:
+    Circulo* m_Circulo; // Puntero a la interfaz vieja (círculo)
 };
 
 // Implementa la clase dibujable heredando el cuadrado para poder dibujarlo
@@ -48,9 +46,9 @@ public:
 
     void dibujar() override {
         cout << "Adaptador para dibujar." << endl;
-        m_cuadrado->DibujarCuadrado();
+        m_cuadrado->DibujarCuadrado(); // Llama al método de la interfaz vieja para adaptarlo al nuevo
     }
 
-public:
-    Cuadrado* m_cuadrado;
+private:
+    Cuadrado* m_cuadrado; // Puntero a la interfaz vieja (cuadrado)
 };

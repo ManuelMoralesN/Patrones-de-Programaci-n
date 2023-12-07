@@ -19,7 +19,7 @@ RegistroActividad* RegistroActividad::m_instance = nullptr;
 
 int main() {
     // Singleton
-    cout << "//////////////Singleton/////////////////////"<<endl;
+    cout << "//////////////Singleton/////////////////////" << endl;
     // Obtiene la instancia única del Singleton
     Singleton* SingleMan = Singleton::getInstance();
     SingleMan->setValue(27);
@@ -29,7 +29,6 @@ int main() {
     std::cout << "Value: " << SingleMan2->getValue() << std::endl;
 
     // Singleton Register
-
     // Obtiene las instancias del Singleton
     RegistroActividad* Registro = RegistroActividad::getInstance();
     RegistroActividad* Registro2 = RegistroActividad::getInstance();
@@ -37,11 +36,30 @@ int main() {
     // Agrega actividades al primer registro
     Registro->addActivity("Primer actividad");
     Registro->addActivity("Segunda actividad");
-    Registro->addActivity("Tercea actividad");
+    Registro->addActivity("Tercera actividad");
     Registro->addActivity("Cuarta actividad");
 
     // Muestra las actividades del registro anterior, al ser Singleton esto es posible
     Registro2->showActivities();
+
+    // Builder
+    cout << "///////////////////////Builder////////////////////////////" << endl;
+    // Se crea un objeto BuilderConcreto
+    Builder* constructor = new BuilderConcreto();
+
+    // Se crea un director que se encargará de construir el producto
+    Director director(constructor);
+
+    // Construcción del producto usando el Director
+    director.build();
+
+    // Se obtiene el nuevo producto desde el constructor
+    bProduct* producto = constructor->obtenerProducto();
+    producto->print();
+
+    // Liberar memoria asignada
+    delete constructor;
+    delete producto;
 
     // Factory
     cout << "//////////////Factory///////////////////" << endl;
@@ -55,7 +73,6 @@ int main() {
     delete product;
 
     // Factory Vehículos
-
     // Se crea una instancia para la clase concreta de factory y se crea un vehículo
     FactoryVehiculos* factoryV = new ConcreteFactoryCoche();
     Vehiculo* vehiculo = factoryV->crearVehiculo();
@@ -67,11 +84,13 @@ int main() {
 
     // Abstract Factory
     cout << "////////////////Abstract Factory////////////////////" << endl;
+    // Se crea una instancia de ConcreteAbsFactory
     AbstractFactory* AFactory = new ConcreteAbsFactory();
 
     // Se crean productos usando la fábrica
     ProductA* productA = AFactory->crearProductoA();
     ProductB* productB = AFactory->crearProductoB();
+
     // Se mandan a llamar las operaciones de cada producto
     productA->operationA();
     productB->operationB();
@@ -80,24 +99,6 @@ int main() {
     delete AFactory;
     delete productA;
     delete productB;
-
-    // Builder
-    cout << "///////////////////////Builder////////////////////////////" << endl;
-    Builder* constructor = new BuilderConcreto();
-
-    // Se crea al director que se encargará de construir el producto
-    Director director(constructor);
-
-    // Construcción del producto usando el Director
-    director.build();
-
-    // Se obtiene el nuevo producto desde el constructor
-    bProduct* producto = constructor->obtenerProducto();
-    producto->print();
-
-    // Liberar memoria asignada
-    delete constructor;
-    delete producto;
 
     // Pizza Builder
     cout << "/////////////////////////Pizza/////////////////////////" << endl;
@@ -154,22 +155,6 @@ int main() {
     delete AdCircle;
     delete AdSquare;
 
-    // Prototype
-    cout << "//////////////////////////Prototype///////////////////////////"<< endl;
-    // Se usa el puntero para la clase que se está clonando
-    Prototype* prototype = new PrototipoConcreto();
-    prototype->configurar("Ejemplo"); // Se configura el recurso
-
-    Prototype* copia = prototype->clonar(); // Se clona el recurso
-
-    // Se imprimen los recursos
-    prototype->print();
-    copia->print();
-
-    // Liberar memoria asignada
-    delete prototype;
-    delete copia;
-
     // Decorator
     cout << "//////////////////////////Decorator//////////////////////////////////" << endl;
     ConcreteComponent* objeto = new ConcreteComponent();
@@ -206,6 +191,22 @@ int main() {
     delete cafeteria;
     delete cafeAzucar;
     delete cafeLeche;
+
+    // Prototype
+    cout << "//////////////////////////Prototype///////////////////////////" << endl;
+    // Se usa el puntero para la clase que se está clonando
+    Prototype* prototype = new PrototipoConcreto();
+    prototype->configurar("Ejemplo"); // Se configura el recurso
+
+    Prototype* copia = prototype->clonar(); // Se clona el recurso
+
+    // Se imprimen los recursos
+    prototype->print();
+    copia->print();
+
+    // Liberar memoria asignada
+    delete prototype;
+    delete copia;
 
     // Composite
     cout << "////////////////////////////Composite///////////////////////////////////" << endl;

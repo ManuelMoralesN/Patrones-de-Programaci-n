@@ -1,8 +1,6 @@
 #pragma once
 #include "Prerequisites.h"
 
-
-
 // Clase base para definir Archivo
 class Archivo {
 public:
@@ -22,7 +20,7 @@ public:
 // Clase que funciona como interfaz
 class Sistema {
 public:
-    virtual void MostrarInfo() = 0;
+    virtual void MostrarInfo() = 0; // Método virtual puro para mostrar información
 };
 
 // Clase que representa un archivo y también es un sistema

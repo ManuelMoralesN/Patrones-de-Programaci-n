@@ -1,54 +1,49 @@
 #pragma once
 #include "Prerequisites.h"
 
-//Clase base para productos A
+// Clase base para productos A
 class ProductA {
 public:
-    virtual
-        void
-        operationA() = 0;
+    virtual void operationA() = 0; // Método virtual puro para la operación A
 };
 
-//Clase base para productos B
+// Clase base para productos B
 class ProductB {
 public:
-    virtual
-        void
-        operationB() = 0;
+    virtual void operationB() = 0; // Método virtual puro para la operación B
 };
 
-//Clase abstract factory
+// Clase abstracta para la fábrica abstracta
 class AbstractFactory {
 public:
-    virtual ProductA* crearProductoA() = 0;
-    virtual ProductB* crearProductoB() = 0;
+    virtual ProductA* crearProductoA() = 0; // Método virtual puro para crear ProductA
+    virtual ProductB* crearProductoB() = 0; // Método virtual puro para crear ProductB
 };
 
-//Clase concreta para productos A
-class productA1 : public ProductA {
+// Clase concreta para productos A
+class ProductA1 : public ProductA {
 public:
-    void
-        operationA() override {
+    void operationA() override {
         cout << "Operación A en ProductoA1" << endl;
     }
 };
 
-//Clase concreta para productos B
-class productB1 : public ProductB {
+// Clase concreta para productos B
+class ProductB1 : public ProductB {
 public:
-    void
-        operationB() override {
-        cout << "Operación B en ProductoA1" << endl;
+    void operationB() override {
+        cout << "Operación B en ProductoB1" << endl;
     }
 };
 
-//Clase concreta para la implementación de abstract factory
+// Clase concreta para la implementación de AbstractFactory
 class ConcreteAbsFactory : public AbstractFactory {
 public:
     ProductA* crearProductoA() override {
-        return new productA1();
+        return new ProductA1(); // Crea una instancia de ProductA1
     }
+
     ProductB* crearProductoB() override {
-        return new productB1();
+        return new ProductB1(); // Crea una instancia de ProductB1
     }
 };

@@ -1,100 +1,78 @@
 #pragma once
 #include "Prerequisites.h"
 
-/*
-  Brief: Esta clase está encargada de ser el objeto base de los productos que se crearán
-*/
+// Base interface for products
 class Product {
 public:
-    virtual
-        void
-        operacion() = 0;
+    virtual void operacion() = 0; // Virtual function for product operation
 };
 
-/*
-  Brief: Esta clase es el objeto base que sirve para crear las instancias de
-  cada producto con la función "crearProducto()"
-*/
+// Base interface for factories
 class Factory {
 public:
-    virtual
-        Product* crearProducto() = 0;
+    virtual Product* crearProducto() = 0; // Virtual function to create products
 };
 
-/*
-  Brief: Esta clase se usa para realizar las operaciones tras recibir el producto
-*/
+// Concrete implementation of the Product interface
 class ConcreteProduct : public Product {
 public:
-    void
-        operacion() override {
-        cout << "Acá se realiza una operación" << endl;
+    void operacion() override {
+        cout << "Acá se realiza una operación" << endl; // Implementation of the product operation
     }
 };
 
-/*
-  Brief: Se usa para crear nuevos productos
-*/
+// Concrete implementation of the Factory interface
 class ConcreteFactory : public Factory {
 public:
     Product* crearProducto() override {
-        return new ConcreteProduct();
+        return new ConcreteProduct(); // Creates instances of ConcreteProduct
     }
 };
 
+// Example of the Factory Method pattern for vehicles
 
-//Ejemplo del pattern Factory
-
-//Clase encargada de ser el objeto base de los vehículos que se crearán
+// Base interface for vehicles
 class Vehiculo {
 public:
-    virtual
-        void
-        descripcion() {
-        cout << "Hola, soy un vehículo" << endl;
+    virtual void descripcion() {
+        cout << "Hola, soy un vehículo" << endl; // Virtual function for describing the vehicle
     }
 };
 
-//Esta clase se usa para realizar las operaciones de coche tras recibir un vehículo
+// Concrete implementation for a car
 class ConcreteCoche : public Vehiculo {
 public:
-    void
-        descripcion() override {
-        cout << "Hola, soy un coche" << endl;
+    void descripcion() override {
+        cout << "Hola, soy un coche" << endl; // Implementation of the description for a car
     }
 };
 
-//Esta clase se usa para realizar las operaciones de bicicleca tras recibir el producto
+// Concrete implementation for a bicycle
 class ConcreteBicicleta : public Vehiculo {
 public:
-    void
-        descripcion() override {
-        cout << "Hola, soy un bicicleta" << endl;
+    void descripcion() override {
+        cout << "Hola, soy una bicicleta" << endl; // Implementation of the description for a bicycle
     }
 };
 
-/*
-  Brief: Esta clase es el objeto base que sirve para crear las instancias de
-  cada vehñiculo con la función "crearVehículo()"
-*/
+// Base interface for vehicle factories
 class FactoryVehiculos {
 public:
-    virtual
-        Vehiculo* crearVehiculo() = 0;
+    virtual Vehiculo* crearVehiculo() = 0; // Virtual function to create instances of Vehiculo
 };
 
-//Esta clase crea nuevos vehículos de tipo coche
+// Concrete implementation for a factory that creates cars
 class ConcreteFactoryCoche : public FactoryVehiculos {
 public:
     Vehiculo* crearVehiculo() override {
-        return new ConcreteCoche();
+        return new ConcreteCoche(); // Creates instances of ConcreteCoche
     }
 };
 
-//Esta clase crea nuevos vehículos de tipo bicicleta
+// Concrete implementation for a factory that creates bicycles
 class ConcreteFactoryBicicleta : public FactoryVehiculos {
 public:
     Vehiculo* crearVehiculo() override {
-        return new ConcreteBicicleta();
+        return new ConcreteBicicleta(); // Creates instances of ConcreteBicicleta
     }
 };

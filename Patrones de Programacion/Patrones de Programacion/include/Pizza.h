@@ -1,7 +1,6 @@
 #pragma once
 #include "Prerequisites.h"
 
-
 // Clase para las pizzas por cocinar
 class Pizza
 {
